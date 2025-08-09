@@ -20,7 +20,7 @@ local petTable = {
     ["Paradise Egg"] = { "Ostrich", "Peacock", "Capybara" },
     ["Dinosaur Egg"] = { "Raptor", "Triceratops", "Stegosaurus" },
     ["Primal Egg"] = { "Parasaurolophus", "Iguanodon", "Pachycephalosaurus" },
-    ["Zen Egg"] = { "Shiba Inu", "Nihonzaru", "Tanuki" },
+    ["Zen Egg"] = { "Shiba Inu", "Nihonzaru", "Tanuki" }
 }
 
 local espEnabled = true
@@ -262,12 +262,35 @@ autoBtn.MouseButton1Click:Connect(function()
     end)()
 end)
 
+-- Exit Button
+local exitBtn = Instance.new("TextButton", frame)
+exitBtn.Size = UDim2.new(1, -20, 0, 30)
+exitBtn.Position = UDim2.new(0, 10, 0, 185)  -- Below Auto Randomize button
+exitBtn.BackgroundColor3 = Color3.fromRGB(200, 50, 50)
+exitBtn.Text = "❌ Exit"
+exitBtn.TextSize = 18
+exitBtn.Font = Enum.Font.FredokaOne
+exitBtn.TextColor3 = Color3.new(1, 1, 1)
+local exitCorner = Instance.new("UICorner", exitBtn)
+exitCorner.CornerRadius = UDim.new(0, 6)
+
+exitBtn.MouseButton1Click:Connect(function()
+    -- Tween menu sliding down and fading out
+    local tweenInfo = TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+    local tweenPos = TweenService:Create(frame, tweenInfo, {Position = UDim2.new(frame.Position.X.Scale, frame.Position.X.Offset, 1.5, 0)})
+    local tweenTransparency = TweenService:Create(frame, tweenInfo, {BackgroundTransparency = 1})
+    tweenPos:Play()
+    tweenTransparency:Play()
+    tweenTransparency.Completed:Wait()
+    screenGui:Destroy()
+end)
+
 -- 🏷️ Credit Label at the bottom of the GUI
 local credit = Instance.new("TextLabel", frame)
 credit.Size = UDim2.new(1, 0, 0, 20)
 credit.Position = UDim2.new(0, 0, 1, -20)
 credit.BackgroundTransparency = 1
-credit.Text = "Made by ZuriOnTop"
+credit.Text = "Made by ZuriScripts"
 credit.Font = Enum.Font.FredokaOne
 credit.TextSize = 14
 credit.TextColor3 = Color3.fromRGB(200, 200, 200)
